@@ -8,12 +8,20 @@ let sieveOfEratosthenes (n : int) : Collections.BitArray =
     arr.Set(0, false)
     arr.Set(1, false)
 
+    let succ p =
+        let rec impl acc =
+            match arr.Get(acc) with
+            | true -> acc
+            | _ -> impl (acc + 1)
+
+        impl (p + 1)
+
     let rec mark p acc n =
         match () with
         | _ when p * p > n -> arr
         | _ ->
             match () with
-            | _ when acc > n -> mark (p + 1) ((p + 1) * (p + 1)) n
+            | _ when acc > n -> let sp = succ p in mark sp (sp * sp) n
             | _ -> arr.Set(acc, false)
                    mark p (acc + p) n
 
