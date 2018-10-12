@@ -22,7 +22,38 @@
 * SOFTWARE.
 ******************************************************************************/
 
-#![allow(dead_code)]
+struct FibNumbers {
+    curr: u32,
+    prev: u32
+}
 
-mod problem1;
-mod problem2;
+impl FibNumbers {
+    fn new() -> FibNumbers {
+        FibNumbers {
+            curr: 1,
+            prev: 0
+        }
+    }
+}
+
+impl Iterator for FibNumbers {
+    type Item = u32;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let succ = self.prev + self.curr;
+        self.prev = self.curr;
+        self.curr = succ;
+        Some(succ)
+    }
+}
+
+#[test]
+#[ignore]
+fn problem2() {
+    let res: u32 = FibNumbers::new()
+        .take_while(|n| *n <= 4_000_000)
+        .filter(|n| *n % 2 == 0)
+        .sum();
+
+    assert_eq!(res, 4_613_732);
+}
