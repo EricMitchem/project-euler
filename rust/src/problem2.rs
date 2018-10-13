@@ -51,8 +51,8 @@ impl Iterator for FibNumbers {
 #[ignore]
 fn problem2() {
     let res: u32 = FibNumbers::new()
-        .take_while(|n| *n <= 4_000_000)
-        .filter(|n| *n % 2 == 0)
+        .take_while(|&n| n <= 4_000_000)
+        .filter(|&n| n % 2 == 0)
         .sum();
 
     assert_eq!(res, 4_613_732);

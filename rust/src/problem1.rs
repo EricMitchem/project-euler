@@ -50,9 +50,7 @@ impl Iterator for Numbers {
 #[test]
 #[ignore]
 fn problem1() {
-    let numbers = Numbers::new();
+    let res: u32 = Numbers::new().sum();
 
-    let sum: u32 = numbers.sum();
-
-    assert_eq!(sum, 233_168);
+    assert_eq!(res, 233_168);
 }
